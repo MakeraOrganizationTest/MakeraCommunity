@@ -1,0 +1,10 @@
+model Machines {
+  id          String   @id @default(uuid()) /// 机器ID
+  name        String /// 机器名称
+  description String? /// 机器描述
+  thumbnail   String? /// 缩略图
+  created_at  DateTime @default(now()) /// 创建时间
+  updated_at  DateTime @updatedAt /// 更新时间
+
+  @@map("machines")
+}

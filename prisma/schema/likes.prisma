@@ -1,0 +1,16 @@
+// 统一点赞表
+model Likes {
+  id           String      @id @default(uuid()) @db.Uuid /// 点赞唯一标识符
+  user_id      String      @db.Uuid /// 点赞用户ID
+  content_type ContentType /// 内容类型
+  content_id   String      @db.Uuid /// 内容ID
+  created_at   DateTime    @default(now()) @db.Timestamptz() /// 点赞时间
+
+  // 关系
+  user Users @relation(fields: [user_id], references: [id], onDelete: Cascade) /// 用户，级联删除
+
+  @@unique([user_id, content_type, content_id]) /// 确保用户对特定内容只能点赞一次
+  @@index([content_type, content_id]) /// 优化查询特定内容的点赞
+  @@index([user_id, content_type]) /// 优化查询用户对特定类型内容的点赞
+  @@map("likes")
+}

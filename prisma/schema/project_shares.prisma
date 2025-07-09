@@ -1,0 +1,17 @@
+// 项目分享/转发表
+model ProjectShares {
+  id         String   @id @default(uuid()) @db.Uuid /// 分享唯一标识符
+  user_id    String   @db.Uuid /// 分享用户ID
+  project_id String   @db.Uuid /// 项目ID
+  share_to   String /// 分享平台/目标
+  share_url  String? /// 分享链接
+  created_at DateTime @default(now()) @db.Timestamptz() /// 分享时间
+
+  // 关系
+  user    Users    @relation(fields: [user_id], references: [id], onDelete: Cascade) /// 用户，级联删除
+  project Projects @relation(fields: [project_id], references: [id], onDelete: Cascade) /// 项目，级联删除
+
+  @@index([project_id]) /// 优化查询特定项目的分享
+  @@index([user_id]) /// 优化查询用户的分享
+  @@map("project_shares")
+}

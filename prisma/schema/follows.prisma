@@ -1,0 +1,14 @@
+// 用户关注关系表
+model UserFollows {
+  id          String   @id @default(uuid()) @db.Uuid /// 关注记录唯一标识符
+  follower_id String   @db.Uuid /// 关注者用户ID
+  followed_id String   @db.Uuid /// 被关注者用户ID
+  created_at  DateTime @default(now()) @db.Timestamptz() /// 关注创建时间
+  updated_at  DateTime @default(now()) @db.Timestamptz() /// 更新时间
+
+  follower Users @relation("UserFollowings", fields: [follower_id], references: [id], onDelete: NoAction, onUpdate: NoAction) /// 关注者
+  followed Users @relation("UserFollowers", fields: [followed_id], references: [id], onDelete: NoAction, onUpdate: NoAction) /// 被关注者
+
+  @@unique([follower_id, followed_id]) /// 确保关注关系的唯一性
+  @@map("user_follows")
+}

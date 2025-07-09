@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "prisma.prisma",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "formulahendry.auto-rename-tag",
+    "naumovs.color-highlight",
+    "usernamehw.errorlens",
+    "yoavbls.pretty-ts-errors",
+    "pkief.material-icon-theme",
+    "streetsidesoftware.code-spell-checker",
+    "csstools.postcss",
+    "vivaxy.vscode-conventional-commits"
+  ]
+}

@@ -1,0 +1,24 @@
+// 统一举报表
+model Reports {
+  id           String       @id @default(uuid()) @db.Uuid /// 举报唯一标识符
+  content_type ContentType /// 被举报内容类型
+  content_id   String       @db.Uuid /// 被举报内容ID
+  reporter_id  String       @db.Uuid /// 举报者ID
+  type         ReportType /// 举报类型
+  reason       String /// 举报原因
+  status       ReportStatus @default(pending) /// 举报状态
+  handler_id   String?      @db.Uuid /// 处理人ID
+  handle_note  String? /// 处理说明
+  handled_at   DateTime?    @db.Timestamptz() /// 处理时间
+  created_at   DateTime     @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at   DateTime     @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  reporter Users  @relation("ReporterRelation", fields: [reporter_id], references: [id], onDelete: NoAction) /// 举报者
+  handler  Users? @relation("HandlerRelation", fields: [handler_id], references: [id], onDelete: SetNull) /// 处理人
+
+  @@index([content_type, content_id]) /// 优化查询特定内容的举报
+  @@index([reporter_id]) /// 优化查询用户的举报
+  @@index([status]) /// 优化按状态查询举报
+  @@map("reports")
+}

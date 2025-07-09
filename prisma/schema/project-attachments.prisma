@@ -1,0 +1,18 @@
+// 项目附件表 - 存储除项目原始模型文件和项目文件外的其他附件
+model ProjectAttachments {
+  id          String   @id @default(uuid()) @db.Uuid /// 文件唯一标识符
+  project_id  String   @db.Uuid /// 关联的项目 ID
+  name        String /// 文件名称
+  description String? /// 文件描述
+  file_path   String /// 文件存储路径
+  file_size   BigInt /// 文件大小(字节)
+  file_type   String /// 文件类型/扩展名
+  created_at  DateTime @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at  DateTime @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  project Projects @relation(fields: [project_id], references: [id], onDelete: Cascade) /// 所属项目，级联删除
+
+  @@index([project_id]) /// 优化查询特定项目的附件
+  @@map("project_attachments")
+}

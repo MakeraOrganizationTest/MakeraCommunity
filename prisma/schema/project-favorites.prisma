@@ -1,0 +1,16 @@
+// 项目收藏表
+model ProjectFavorites {
+  id         String   @id @default(uuid()) @db.Uuid /// 收藏唯一标识符
+  user_id    String   @db.Uuid /// 收藏用户ID
+  project_id String   @db.Uuid /// 项目 ID
+  created_at DateTime @default(now()) @db.Timestamptz() /// 收藏时间
+
+  // 关系
+  user    Users    @relation(fields: [user_id], references: [id], onDelete: Cascade) /// 用户，级联删除
+  project Projects @relation(fields: [project_id], references: [id], onDelete: Cascade) /// 项目，级联删除
+
+  @@unique([user_id, project_id]) /// 确保用户对特定内容只能收藏一次
+  @@index([project_id]) /// 优化查询特定内容的收藏
+  @@index([user_id, project_id]) /// 优化查询用户收藏的特定类型内容
+  @@map("project_favorites")
+}

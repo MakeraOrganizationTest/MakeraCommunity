@@ -1,0 +1,37 @@
+// 用户表 - 扩展自 Supabase Auth
+model Users {
+  id              String         @id @default(uuid()) @db.Uuid /// 用户唯一标识
+  auth0_id        String         @unique /// Auth0 用户唯一标识
+  full_name       String? /// 用户全名
+  nick_name       String? /// 用户昵称
+  user_name       String? /// 用户名，唯一
+  picture         String? /// 头像URL
+  email           String? /// 电子邮箱
+  email_verified  Boolean? /// 邮箱是否已验证
+  bio             String? /// 个人简介
+  gender          GenderType? /// 性别
+  birthday        DateTime?      @db.Date /// 生日，格式为 YYYY-MM-DD
+  status          UserStatusType @default(active) /// 用户状态，默认为活跃
+  follower_count  Int            @default(0) /// 粉丝数量
+  following_count Int            @default(0) /// 关注数量
+  is_deleted      Boolean        @default(false) /// 是否已删除，软删除标记
+  deleted_at      DateTime?      @db.Timestamptz() /// 删除日期
+  last_login_at   DateTime?      @db.Timestamptz() /// 最后登录时间
+  created_at      DateTime       @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at      DateTime       @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  user_roles      UserRoles[] /// 用户角色关联
+  followings      UserFollows[]      @relation("UserFollowings") /// 我关注的人（我是关注者follower）
+  followers       UserFollows[]      @relation("UserFollowers") /// 关注我的人（我是被关注者followed）
+  reported_by     Reports[]          @relation("ReporterRelation") /// 用户提交的举报
+  handled_reports Reports[]          @relation("HandlerRelation") /// 用户处理的举报
+  projects        Projects[] /// 创建的项目
+  likes           Likes[] /// 点赞记录
+  favorites       ProjectFavorites[] /// 收藏记录
+  comments        ProjectComments[] /// 评论记录
+  shares          ProjectShares[] /// 用户的项目分享记录
+  downloads       ProjectDownloads[] /// 下载记录
+
+  @@map("users")
+}

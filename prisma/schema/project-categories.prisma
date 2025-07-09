@@ -1,0 +1,21 @@
+// 项目分类表
+model ProjectCategories {
+  id          Int      @id @default(autoincrement()) @db.Integer /// 分类唯一标识符
+  name        String /// 分类名称
+  slug        String   @unique /// URL友好的分类别名，用于生成URL路径
+  description String? /// 分类描述
+  parent_id   Int? /// 父分类ID，用于构建分类层次结构
+  order       Int      @default(0) /// 分类显示顺序，值越小越靠前
+  is_active   Boolean  @default(true) /// 分类是否激活，false表示不再使用
+  created_at  DateTime @default(now()) @db.Timestamptz() /// 分类创建时间
+  updated_at  DateTime @default(now()) @db.Timestamptz() /// 分类最后更新时间
+
+  // 自关联关系
+  parent   ProjectCategories?  @relation("ProjectCategoriesToProjectCategories", fields: [parent_id], references: [id]) /// 父分类
+  children ProjectCategories[] @relation("ProjectCategoriesToProjectCategories") /// 子分类
+
+  // 新增关系
+  projects Projects[] /// 该分类下的项目
+
+  @@map("project_categories")
+}

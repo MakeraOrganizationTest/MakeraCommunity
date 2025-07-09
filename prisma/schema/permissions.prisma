@@ -1,0 +1,35 @@
+// 权限表
+model Permissions {
+  id          Int            @id @default(autoincrement()) @db.Integer /// 权限ID，自增主键
+  name        String /// 权限名称
+  code        String         @unique /// 权限编码，唯一标识
+  parent_id   Int? /// 父权限ID
+  type        PermissionType /// 权限类型
+  description String? /// 权限描述
+  created_at  DateTime       @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at  DateTime       @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 自关联关系
+  parent   Permissions?  @relation("PermissionToPermission", fields: [parent_id], references: [id]) /// 父权限
+  children Permissions[] @relation("PermissionToPermission") /// 子权限
+
+  // 关系
+  role_permissions RolePermissions[] /// 角色权限关联
+
+  @@map("permissions")
+}
+
+// 角色权限关联表
+model RolePermissions {
+  id            Int      @id @default(autoincrement()) @db.Integer /// 关联ID，自增主键
+  role_id       Int /// 角色ID
+  permission_id Int /// 权限ID
+  created_at    DateTime @default(now()) @db.Timestamptz() /// 创建时间
+
+  // 关系
+  role       Roles       @relation(fields: [role_id], references: [id]) /// 角色
+  permission Permissions @relation(fields: [permission_id], references: [id]) /// 权限
+
+  @@unique([role_id, permission_id]) /// 确保角色和权限的组合唯一
+  @@map("role_permissions")
+}

@@ -1,0 +1,69 @@
+// 刀具类型表 - 替代枚举，允许动态添加
+model CutterTypes {
+  id          String   @id @default(uuid()) /// ID，唯一标识
+  name        String   @unique /// 类型名称
+  description String? /// 类型描述
+  thumbnail   String? /// 缩略图
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  // 关联
+  cutters Cutters[] /// 该类型的刀具
+
+  @@map("cutter_types")
+}
+
+// 刀具分组表 - 支持层级嵌套
+model CutterGroups {
+  id          String  @id @default(uuid()) /// ID，唯一标识
+  name        String /// 分组名称
+  description String? /// 分组描述
+  parent_id   String? /// 父分组ID，支持层级嵌套
+  order       Int     @default(0) /// 排序顺序
+
+  thumbnail  String? /// 缩略图
+  created_at DateTime @default(now()) /// 创建时间
+  updated_at DateTime @updatedAt /// 更新时间
+
+  // 自关联 - 支持层级嵌套
+  parent   CutterGroups?  @relation("CutterGroupHierarchy", fields: [parent_id], references: [id])
+  children CutterGroups[] @relation("CutterGroupHierarchy")
+
+  // 关联
+  cutters Cutters[] // 该分组下的刀具
+
+  @@index([parent_id]) /// 父分组索引
+  @@index([order]) /// 排序索引
+  @@map("cutter_groups")
+}
+
+// 刀具表
+model Cutters {
+  id            String  @id @default(uuid()) /// ID，唯一标识
+  name          String /// 刀具名称
+  type_id       String /// 刀具类型ID
+  group_id      String? /// 刀具分组ID
+  diameter      Float? /// 刀具直径(mm)
+  tip_diameter  Float? /// 刀尖直径(mm)
+  hole_diameter Float? /// 孔径(mm)
+  taper_angle   Float? /// 锥度角度(度)
+  half_angle    Float? /// 半角(度)
+  thumbnail     String? /// 缩略图
+  screw_pitch   Float? /// 螺纹间距(mm)
+  specification String? /// 规格
+  corner_radius Float? /// 倒角半径(mm)
+  description   String? /// 刀具描述
+  length        Float? /// 刀具总长(mm)
+
+  created_at DateTime @default(now()) /// 创建时间
+  updated_at DateTime @updatedAt /// 更新时间
+
+  // 关联
+  type  CutterTypes   @relation(fields: [type_id], references: [id])
+  group CutterGroups? @relation(fields: [group_id], references: [id])
+
+  @@index([type_id]) /// 类型索引
+  @@index([group_id]) /// 分组索引
+  @@index([group_id, type_id]) /// 复合索引
+  @@map("cutters")
+}

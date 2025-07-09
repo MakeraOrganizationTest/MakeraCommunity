@@ -1,0 +1,19 @@
+// 项目下载记录表
+model ProjectDownloads {
+  id         String   @id @default(uuid()) @db.Uuid /// 下载记录唯一标识符
+  project_id String   @db.Uuid /// 项目 ID
+  user_id    String?  @db.Uuid /// 用户ID，可为空表示游客
+  file_id    String   @db.Uuid /// 文件ID（根据file_type指向不同的文件表）
+  file_type  FileType /// 文件类型
+  ip_address String? /// 下载IP地址
+  created_at DateTime @default(now()) @db.Timestamptz() /// 下载时间
+
+  // 关系
+  project Projects @relation(fields: [project_id], references: [id], onDelete: Cascade) /// 项目，级联删除
+  user    Users?   @relation(fields: [user_id], references: [id], onDelete: Cascade) /// 用户，用户删除时级联删除
+
+  @@index([project_id]) /// 项目索引
+  @@index([user_id]) /// 用户索引
+  @@index([file_type, file_id]) /// 文件索引
+  @@map("project_downloads")
+}

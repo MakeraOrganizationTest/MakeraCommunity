@@ -1,0 +1,64 @@
+// 材质类型表
+model MaterialTypes {
+  id          String   @id @default(uuid()) /// 材质类型ID
+  name        String   @unique /// 材质类型名称
+  description String? /// 材质类型描述
+  is_metal    Boolean /// 是否为金属材质
+  thumbnail   String? /// 缩略图
+  created_at  DateTime @default(now()) /// 创建时间
+  updated_at  DateTime @updatedAt /// 更新时间
+
+  // 关联
+  materials Materials[] /// 该类型的材质
+
+  @@map("material_types")
+}
+
+// 材质分组表 - 支持层级嵌套
+model MaterialGroups {
+  id          String  @id @default(uuid()) /// ID，唯一标识
+  name        String /// 分组名称
+  description String? /// 分组描述
+  parent_id   String? /// 父分组ID，支持层级嵌套
+  order       Int     @default(0) /// 排序顺序
+
+  thumbnail  String? /// 缩略图
+  created_at DateTime @default(now()) /// 创建时间
+  updated_at DateTime @updatedAt /// 更新时间
+
+  // 自关联 - 支持层级嵌套
+  parent   MaterialGroups?  @relation("MaterialGroupHierarchy", fields: [parent_id], references: [id])
+  children MaterialGroups[] @relation("MaterialGroupHierarchy")
+
+  // 关联
+  materials Materials[] /// 该分组下的材质
+
+  @@index([parent_id]) /// 父分组索引
+  @@index([order]) /// 排序索引
+  @@map("material_groups")
+}
+
+// 材质表
+model Materials {
+  id          String   @id @default(uuid()) /// 材质ID
+  name        String /// 材质名称
+  type_id     String /// 材质类型ID
+  group_id    String? /// 材质分组ID
+  description String? /// 材质描述
+  thumbnail   String? /// 缩略图
+  // 长宽高
+  length      Float? /// 长度(mm)
+  width       Float? /// 宽度(mm)
+  height      Float? /// 高度(mm)
+  created_at  DateTime @default(now()) /// 创建时间
+  updated_at  DateTime @updatedAt /// 更新时间
+
+  // 关联
+  type  MaterialTypes   @relation(fields: [type_id], references: [id])
+  group MaterialGroups? @relation(fields: [group_id], references: [id])
+
+  @@index([type_id]) /// 类型索引
+  @@index([group_id]) /// 分组索引
+  @@index([group_id, type_id]) /// 复合索引
+  @@map("materials")
+}

@@ -1,0 +1,30 @@
+// 角色表
+model Roles {
+  id          Int      @id @default(autoincrement()) @db.Integer /// 角色ID，自增主键
+  name        String   @unique /// 角色名称，唯一
+  description String? /// 角色描述
+  is_system   Boolean  @default(false) /// 是否为系统角色
+  created_at  DateTime @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at  DateTime @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  role_permissions RolePermissions[] /// 角色权限关联
+  user_roles       UserRoles[] /// 用户角色关联
+
+  @@map("roles")
+}
+
+// 用户角色关联表
+model UserRoles {
+  id         Int      @id @default(autoincrement()) @db.Integer /// 关联ID，自增主键
+  user_id    String   @db.Uuid /// 用户ID
+  role_id    Int /// 角色ID
+  created_at DateTime @default(now()) @db.Timestamptz() /// 创建时间
+
+  // 关系
+  user Users @relation(fields: [user_id], references: [id], onDelete: Cascade) /// 用户，级联删除
+  role Roles @relation(fields: [role_id], references: [id]) /// 角色
+
+  @@unique([user_id, role_id]) /// 确保用户和角色的组合唯一
+  @@map("user_roles")
+}

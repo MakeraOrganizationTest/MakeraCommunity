@@ -1,0 +1,79 @@
+{
+  "RECORDS": [
+    {
+      "id": "416cc63d-48a9-498b-83e6-1251348ab219",
+      "name": "Example Tools",
+      "parentId": null
+    },
+    {
+      "id": "9cbcf451-f3f8-4bbc-bab9-bc74cdfc445f",
+      "name": "Flat End",
+      "parentId": null
+    },
+    {
+      "id": "043b75ac-a01e-4bfc-8654-aad8f493dc98",
+      "name": "Engraving",
+      "parentId": null
+    },
+    {
+      "id": "7210f5d7-26d8-463a-a353-210c782c8b03",
+      "name": "Ball Nose",
+      "parentId": null
+    },
+    {
+      "id": "b4803e27-0f3f-4709-afc2-69812e1b6f87",
+      "name": "Drill",
+      "parentId": null
+    },
+    {
+      "id": "d2b81f9e-18ee-4465-9787-a017defec0c3",
+      "name": "Single Flute Metal",
+      "parentId": "9cbcf451-f3f8-4bbc-bab9-bc74cdfc445f"
+    },
+    {
+      "id": "ced6670c-7a35-43e4-8c63-9545eb8af9f0",
+      "name": "Single Flute Non Metal",
+      "parentId": "9cbcf451-f3f8-4bbc-bab9-bc74cdfc445f"
+    },
+    {
+      "id": "eb10acc5-6362-40dd-8818-affa5218a5d1",
+      "name": "Single Flute Metal",
+      "parentId": "043b75ac-a01e-4bfc-8654-aad8f493dc98"
+    },
+    {
+      "id": "b122a2ba-b0bc-4f13-8805-dc1736386529",
+      "name": "Single Flute Non Metal",
+      "parentId": "043b75ac-a01e-4bfc-8654-aad8f493dc98"
+    },
+    {
+      "id": "d1a398d6-5388-4104-a34f-ca53c295ba59",
+      "name": "Ball Nose Metal",
+      "parentId": "7210f5d7-26d8-463a-a353-210c782c8b03"
+    },
+    {
+      "id": "de2f827f-169a-4591-a9de-e2938641fd6c",
+      "name": "Ball Nose Non Metal",
+      "parentId": "7210f5d7-26d8-463a-a353-210c782c8b03"
+    },
+    {
+      "id": "02eab079-5574-4229-8df4-48aaac11d98c",
+      "name": "Corn Bits",
+      "parentId": "9cbcf451-f3f8-4bbc-bab9-bc74cdfc445f"
+    },
+    {
+      "id": "7c1a78b4-8958-4f09-a4cf-c3d89819b80d",
+      "name": "Chamfering Bits",
+      "parentId": "043b75ac-a01e-4bfc-8654-aad8f493dc98"
+    },
+    {
+      "id": "5e992a79-d222-4baa-b133-fe1060a23305",
+      "name": "Solder Mask Remover",
+      "parentId": "043b75ac-a01e-4bfc-8654-aad8f493dc98"
+    },
+    {
+      "id": "5b35c441-1dd9-426c-bd92-44224787ec3f",
+      "name": "Thread",
+      "parentId": null
+    }
+  ]
+}

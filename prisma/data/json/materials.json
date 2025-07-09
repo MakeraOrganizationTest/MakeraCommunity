@@ -1,0 +1,36 @@
+{
+  "RECORDS": [
+    {
+      "id": "f21c0c55-cc96-4bf9-9237-379192d4e6dc",
+      "name": "Hardwood"
+    },
+    {
+      "id": "b336c5e0-7a0e-4001-8b04-f8c37e06df64",
+      "name": "Softwood"
+    },
+    {
+      "id": "1fbb5c7c-3feb-48c2-a2e5-0ddcba47b074",
+      "name": "Plastic"
+    },
+    {
+      "id": "71a05ccc-5728-49aa-aa00-fafdf6b1cbfa",
+      "name": "Aluminum"
+    },
+    {
+      "id": "41bbce25-0ffb-4238-9121-1bfd3db08957",
+      "name": "Copper"
+    },
+    {
+      "id": "50b4e142-fac5-421a-bdcb-cb39a206b7da",
+      "name": "Brass"
+    },
+    {
+      "id": "91be481b-7c98-4ee3-a2fb-3c52a4021360",
+      "name": "PCB"
+    },
+    {
+      "id": "ac581aa5-f42c-4e22-9a15-548eea1abf8f",
+      "name": "Carbon Fiber"
+    }
+  ]
+}

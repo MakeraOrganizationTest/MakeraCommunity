@@ -1,0 +1,17 @@
+// 项目许可证表
+model Licenses {
+  id          String   @id @default(uuid()) @db.Uuid /// 许可证唯一标识符
+  name        String /// 许可证名称
+  code        String   @unique /// 许可证代码
+  description String /// 许可证说明
+  thumbnail   String? /// 许可证缩略图
+  link        String? /// 许可证链接
+  is_active   Boolean  @default(true) /// 许可证是否激活，false表示不再使用
+  created_at  DateTime @default(now()) /// 创建时间
+  updated_at  DateTime @updatedAt /// 更新时间
+
+  // 关系
+  projects Projects[] /// 使用此许可证的项目
+
+  @@map("licenses")
+}

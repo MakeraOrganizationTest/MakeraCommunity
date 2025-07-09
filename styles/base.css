@@ -1,0 +1,97 @@
+:root {
+  --radius: 12px;
+
+  /* 基础颜色 */
+  --m-background: #f4f7fa;
+  --m-foreground: #1b1b1b;
+  --m-card: #ffffff;
+  --m-card-foreground: #1b1b1b;
+  --m-border: #e7edf3;
+  --m-input: #dee4e9;
+  --m-input-disabled: #e0e7ed;
+  --m-ring: #1b73e8;
+
+  /* 主色系 */
+  --m-primary: #1b73e8;
+  --m-primary-0: #115ec8;
+  --m-primary-1: #2b84ff;
+  --m-primary-2: #8bbbfd;
+  --m-primary-3: #e8f1ff;
+
+  /* 中性色系 - 文本 */
+  --m-text-primary: #1b1b1b;
+  --m-text-secondary: #3c3f44;
+  --m-text-tertiary: #7f8389;
+  --m-text-quaternary: #8c949c;
+
+  /* 辅助色 */
+  --secondary: #ff48b6;
+
+  /* 点缀色系 */
+  --m-accent-1: #18cb59;
+  --m-accent-2: #f7ee17;
+  --m-accent-gradient: linear-gradient(135deg, #1bae51 0%, #f7ee17 100%);
+
+  /* 状态色系 - 成功 */
+  --m-success-1: #18cb59;
+  --m-success-2: #8be5ac;
+  --m-success-3: #e8faee;
+
+  /* 状态色系 - 警告 */
+  --m-warning-1: #ff8109;
+  --m-warning-2: #ffc084;
+  --m-warning-3: #fff2e6;
+
+  /* 状态色系 - 错误/危险 */
+  --m-destructive-1: #ff4759;
+  --m-destructive-2: #ffa3ac;
+  --m-destructive-3: #ffedee;
+}
+
+.dark {
+  /* 基础颜色 */
+  --m-background: #0a0a0a;
+  --m-foreground: #ffffff;
+  --m-card: #141415;
+  --m-popover: #141415;
+  --m-border: #27272a;
+  --m-input: #27272a;
+  --m-input-disabled: #616163;
+  --m-ring: #1e6fe0;
+
+  /* 主色系 */
+  --m-primary: #1e6fe0;
+  --m-primary-0: #115ec8;
+  --m-primary-1: #1e6fe0;
+  --m-primary-2: #103870;
+  --m-primary-3: #0b131e;
+
+  /* 中性色系 - 文本 */
+  --m-text-primary: #ffffff;
+  --m-text-secondary: #d4d4d4;
+  --m-text-tertiary: #a1a1a1;
+  --m-text-quaternary: #616163;
+
+  /* 辅助色 */
+  --secondary: #e2389e;
+
+  /* 点缀色系 */
+  --m-accent-1: #1bae51;
+  --m-accent-2: #f7ee17;
+  --m-accent-gradient: linear-gradient(135deg, #1bae51 0%, #f7ee17 100%);
+
+  /* 状态色系 - 成功 */
+  --m-success-1: #1bae51;
+  --m-success-2: #135c2e;
+  --m-success-3: #0c1a11;
+
+  /* 状态色系 - 警告 */
+  --m-warning-1: #e9770a;
+  --m-warning-2: #e9770a;
+  --m-warning-3: rgba(233, 119, 10, 0.1);
+
+  /* 状态色系 - 错误/危险 */
+  --m-destructive-1: #e12d3f;
+  --m-destructive-2: rgba(225, 45, 63, 0.1);
+  --m-destructive-3: rgba(225, 45, 63, 0.1);
+}

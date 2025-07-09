@@ -1,0 +1,63 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Emoji 通用规范
+
+## 使用场景
+
+### Git 提交场景
+- 生成 Git Commit 信息时
+- 分析代码变更类型时
+- 提供 Commit 建议时
+
+## 要求
+
+### Git 提交要求
+- 遵循格式：`${type}: ${emoji} ${message}`
+- 从规定类型表中选择对应的 type 和 emoji
+- 提供简明扼要的中文描述信息
+
+## Git 提交类型对照表
+| 类型 | Emoji | 说明 |
+|---|-----|---|
+| feat | ✨ | 新功能 |
+| fix | 🐛 | BUG修复 |
+| docs | 📝 | 文档更新 |
+| style | 💄 | 样式调整 |
+| refactor | ♻️ | 代码重构 |
+| perf | ⚡️ | 性能优化 |
+| test | ✅ | 测试相关 |
+| build | 📦️ | 构建相关 |
+| ci | 🎡 | CI配置 |
+| revert | ⏪️ | 回退更改 |
+| chore | 🔨 | 其他更改 |
+
+## 示例
+
+### Git 提交示例
+<example>
+feat: ✨ 添加用户登录功能
+fix: 🐛 修复移动端布局问题
+docs: 📝 更新 README.md
+style: 💄 优化按钮样式
+</example>
+
+<example type="invalid">
+添加了新功能
+fix bug
+🐛修复问题
+feat:新功能
+</example>
+
+## 关键规则
+
+### Git 提交关键规则
+  - 必须包含类型、emoji 和描述信息
+  - 类型后必须有冒号和空格
+  - emoji 后必须有空格
+  - 根据文件类型自动匹配：.md->docs, .test->test, .css->style
+  - 根据内容匹配：新增->feat, 修复->fix, 重构->refactor
+  - 根据关键词匹配：修复/fix/bug->fix, 新增/添加->feat 

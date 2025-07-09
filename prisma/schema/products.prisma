@@ -1,0 +1,27 @@
+// 商品链接表 - 多实体类型商品关联
+model ProductLinks {
+  id           String     @id @default(uuid()) /// 链接ID
+  entity_type  EntityType /// 实体类型（刀具/材质/机器/配件等）
+  entity_id    String /// 实体ID
+  country_code String /// 国家/地区代码（如：US, CN, JP, DE等）
+
+  // 商品信息
+  link      String /// 商品链接URL
+  title     String? /// 商品标题
+  price     String? /// 价格（字符串格式，包含货币符号）
+  currency  String? /// 货币代码（USD, CNY, JPY等）
+  thumbnail String? /// 商品缩略图
+
+  // 状态管理
+  is_active  Boolean  @default(true) /// 是否激活
+  sort_order Int? /// 排序顺序
+  created_at DateTime @default(now()) /// 创建时间
+  updated_at DateTime @updatedAt /// 更新时间
+
+  @@unique([entity_type, entity_id, country_code]) /// 防重复
+  // 复合索引优化查询
+  @@index([entity_type, entity_id]) /// 按实体查询
+  @@index([country_code]) /// 按国家查询
+  @@index([entity_type, country_code]) /// 按类型和国家查询
+  @@map("product_links")
+}

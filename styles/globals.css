@@ -1,43 +1,64 @@
-@import "tailwindcss";
-
+@import 'tailwindcss';
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
+  --font-sans: var(--font-inter);
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+
+  /* 直接定义项目颜色 - 无需额外映射 */
+  --color-background: var(--m-background);
+  --color-foreground: var(--m-foreground);
+  --color-border: var(--m-border);
+  --color-input: var(--m-input);
+  --color-ring: var(--m-ring);
+
+  --color-card: var(--m-card);
+  --color-card-foreground: var(--m-card-foreground);
+  --color-popover: var(--m-card);
+  --color-popover-foreground: var(--m-card-foreground);
+
+  --color-primary: var(--m-primary);
+  --color-primary-0: var(--m-primary-0);
+  --color-primary-1: var(--m-primary-1);
+  --color-primary-2: var(--m-primary-2);
+  --color-primary-3: var(--m-primary-3);
+  --color-primary-foreground: var(--m-card);
+
+  --color-secondary: var(--m-secondary);
+  --color-secondary-foreground: var(--m-card);
+
+  --color-muted: var(--m-primary-3);
+  --color-muted-foreground: var(--m-text-quaternary);
+
+  --color-accent: var(--m-accent-1);
+  --color-accent-2: var(--m-accent-2);
+  --color-accent-foreground: var(--m-card);
+
+  --color-text: var(--m-text-primary);
+  --color-text-primary: var(--m-text-primary);
+  --color-text-secondary: var(--m-text-secondary);
+  --color-text-tertiary: var(--m-text-tertiary);
+  --color-text-muted: var(--m-text-quaternary);
+
+  --color-success: var(--m-success-1);
+  --color-success-light: var(--m-success-2);
+  --color-success-lighter: var(--m-success-3);
+  --color-success-foreground: var(--m-card);
+
+  --color-warning: var(--m-warning-1);
+  --color-warning-light: var(--m-warning-2);
+  --color-warning-lighter: var(--m-warning-3);
+  --color-warning-foreground: var(--m-card);
+
+  --color-destructive: var(--m-destructive-1);
+  --color-destructive-light: var(--m-destructive-2);
+  --color-destructive-lighter: var(--m-destructive-3);
+  --color-destructive-foreground: var(--m-card);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -45,72 +66,169 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
+  /* ========== 项目主题色变量（Light Mode） ========== */
+  --radius: 12px;
+
+  /* 基础颜色 */
+  --m-background: #f4f7fa;
+  --m-foreground: #1b1b1b;
+  --m-card: #ffffff;
+  --m-card-foreground: #1b1b1b;
+  --m-border: #e7edf3;
+  --m-input: #dee4e9;
+  --m-input-disabled: #e0e7ed;
+  --m-ring: #1b73e8;
+
+  /* 主色系 */
+  --m-primary: #1b73e8;
+  --m-primary-0: #115ec8;
+  --m-primary-1: #2b84ff;
+  --m-primary-2: #8bbbfd;
+  --m-primary-3: #e8f1ff;
+
+  /* 中性色系 - 文本 */
+  --m-text-primary: #1b1b1b;
+  --m-text-secondary: #3c3f44;
+  --m-text-tertiary: #7f8389;
+  --m-text-quaternary: #8c949c;
+
+  /* 辅助色 */
+  --m-secondary: #ff48b6;
+
+  /* 点缀色系 */
+  --m-accent-1: #18cb59;
+  --m-accent-2: #f7ee17;
+  --m-accent-gradient: linear-gradient(135deg, #1bae51 0%, #f7ee17 100%);
+
+  /* 状态色系 - 成功 */
+  --m-success-1: #18cb59;
+  --m-success-2: #8be5ac;
+  --m-success-3: #e8faee;
+
+  /* 状态色系 - 警告 */
+  --m-warning-1: #ff8109;
+  --m-warning-2: #ffc084;
+  --m-warning-3: #fff2e6;
+
+  /* 状态色系 - 错误/危险 */
+  --m-destructive-1: #ff4759;
+  --m-destructive-2: #ffa3ac;
+  --m-destructive-3: #ffedee;
+
+  /* ========== ShadCN 变量映射到项目主题色 ========== */
+  --background: var(--m-background);
+  --foreground: var(--m-foreground);
+  --card: var(--m-card);
+  --card-foreground: var(--m-card-foreground);
+  --popover: var(--m-card);
+  --popover-foreground: var(--m-card-foreground);
+  --primary: var(--m-primary);
+  --primary-foreground: var(--m-card);
+  --secondary: var(--m-primary-3);
+  --secondary-foreground: var(--m-text-primary);
+  --muted: var(--m-primary-3);
+  --muted-foreground: var(--m-text-quaternary);
+  --accent: var(--m-primary-3);
+  --accent-foreground: var(--m-text-primary);
+  --destructive: var(--m-destructive-1);
+  --border: var(--m-border);
+  --input: var(--m-input);
+  --ring: var(--m-ring);
+  --chart-1: var(--m-primary);
+  --chart-2: var(--m-accent-1);
+  --chart-3: var(--m-secondary);
+  --chart-4: var(--m-warning-1);
+  --chart-5: var(--m-destructive-1);
+  --sidebar: var(--m-card);
+  --sidebar-foreground: var(--m-foreground);
+  --sidebar-primary: var(--m-primary);
+  --sidebar-primary-foreground: var(--m-card);
+  --sidebar-accent: var(--m-primary-3);
+  --sidebar-accent-foreground: var(--m-text-primary);
+  --sidebar-border: var(--m-border);
+  --sidebar-ring: var(--m-ring);
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
+  /* ========== 项目主题色变量（Dark Mode） ========== */
+  /* 基础颜色 */
+  --m-background: #0a0a0a;
+  --m-foreground: #ffffff;
+  --m-card: #141415;
+  --m-card-foreground: #ffffff;
+  --m-border: #27272a;
+  --m-input: #27272a;
+  --m-input-disabled: #616163;
+  --m-ring: #1e6fe0;
+
+  /* 主色系 */
+  --m-primary: #1e6fe0;
+  --m-primary-0: #115ec8;
+  --m-primary-1: #1e6fe0;
+  --m-primary-2: #103870;
+  --m-primary-3: #0b131e;
+
+  /* 中性色系 - 文本 */
+  --m-text-primary: #ffffff;
+  --m-text-secondary: #d4d4d4;
+  --m-text-tertiary: #a1a1a1;
+  --m-text-quaternary: #616163;
+
+  /* 辅助色 */
+  --m-secondary: #e2389e;
+
+  /* 点缀色系 */
+  --m-accent-1: #1bae51;
+  --m-accent-2: #f7ee17;
+  --m-accent-gradient: linear-gradient(135deg, #1bae51 0%, #f7ee17 100%);
+
+  /* 状态色系 - 成功 */
+  --m-success-1: #1bae51;
+  --m-success-2: #135c2e;
+  --m-success-3: #0c1a11;
+
+  /* 状态色系 - 警告 */
+  --m-warning-1: #e9770a;
+  --m-warning-2: #e9770a;
+  --m-warning-3: rgba(233, 119, 10, 0.1);
+
+  /* 状态色系 - 错误/危险 */
+  --m-destructive-1: #e12d3f;
+  --m-destructive-2: rgba(225, 45, 63, 0.1);
+  --m-destructive-3: rgba(225, 45, 63, 0.1);
+
+  /* ========== ShadCN 变量映射到项目主题色 ========== */
+  --background: var(--m-background);
+  --foreground: var(--m-foreground);
+  --card: var(--m-card);
+  --card-foreground: var(--m-card-foreground);
+  --popover: var(--m-card);
+  --popover-foreground: var(--m-card-foreground);
+  --primary: var(--m-primary);
+  --primary-foreground: var(--m-primary-3);
+  --secondary: var(--m-primary-2);
+  --secondary-foreground: var(--m-text-primary);
+  --muted: var(--m-primary-2);
+  --muted-foreground: var(--m-text-tertiary);
+  --accent: var(--m-primary-2);
+  --accent-foreground: var(--m-text-primary);
+  --destructive: var(--m-destructive-1);
+  --border: var(--m-border);
+  --input: var(--m-input);
+  --ring: var(--m-ring);
+  --chart-1: var(--m-primary);
+  --chart-2: var(--m-accent-1);
+  --chart-3: var(--m-secondary);
+  --chart-4: var(--m-warning-1);
+  --chart-5: var(--m-destructive-1);
+  --sidebar: var(--m-card);
+  --sidebar-foreground: var(--m-foreground);
+  --sidebar-primary: var(--m-primary);
+  --sidebar-primary-foreground: var(--m-primary-3);
+  --sidebar-accent: var(--m-primary-2);
+  --sidebar-accent-foreground: var(--m-text-primary);
+  --sidebar-border: var(--m-border);
+  --sidebar-ring: var(--m-ring);
 }
 
 @layer base {
@@ -118,10 +236,9 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-text-primary;
   }
 }
-
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -137,4 +254,47 @@
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 9999;
+}
+
+.m-icon-filled {
+  @apply flex cursor-pointer rounded-[12px] p-[0.625rem] text-[#8C949C] transition-all duration-300 hover:bg-[#F4F7FA] hover:text-[#1B1B1B];
+}
+
+.m-icon-outlined {
+  @apply flex cursor-pointer rounded-[12px] border border-[#CDDAE7] p-[0.625rem] text-[#8C949C] transition-all duration-300 hover:border-[#8C949C] hover:text-[#1B1B1B];
+}
+
+.m-icon {
+  @apply flex cursor-pointer text-[#1B1B1B]/50 transition-all duration-300 hover:text-[#1B1B1B];
+}
+
+.ant-btn-compact-first-item {
+  @apply w-full!;
+}
+
+.ant-tabs-ink-bar {
+  height: 3px !important;
+  border-radius: 3px !important;
+  transform: translate(-50%, -1px) !important;
+}
+
+.ant-tabs-tab {
+  @apply font-semibold text-text-tertiary!;
+}
+
+.ant-tabs-tab-active {
+  @apply font-semibold;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  @apply text-text-primary!;
+}
+
+.ant-alert-icon {
+  @apply text-[20px]!;
+}
+
+.model-panel .ant-tabs-nav {
+  @apply m-0!;
+  @apply bg-card!;
 }

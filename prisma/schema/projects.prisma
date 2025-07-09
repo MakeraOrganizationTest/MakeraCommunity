@@ -1,0 +1,47 @@
+// 项目表
+model Projects {
+  id          String  @id @default(uuid()) @db.Uuid /// 项目唯一标识符
+  creator_id  String  @db.Uuid /// 创建者ID
+  category_id Int? /// 所属分类ID
+  license_id  String? @db.Uuid /// 许可证ID
+  name        String? /// 项目名称
+
+  creation_type      CreationType? @default(original) /// 原创属性 (原创/二创)
+  derivative_sources String[] /// 二创源地址，当creation_type为derivative时必填
+  slug               String?       @unique /// URL友好的项目别名
+  description        String? /// 项目描述(富文本)
+  cover_web          String? /// 网页端封面图(4:3)
+  cover_mobile       String? /// 移动端封面图(3:4)
+  gallery            String[] /// 展示图(可多张)
+  machines_used      Json? /// 使用机器(JSON格式，id可选、name必填)
+  other_parts        Json? /// 其他配件(JSON格式，name必填、remark必填)
+
+  status          ProjectStatus   @default(draft) /// 项目状态
+  visibility      VisibilityType? @default(public) /// 可见性
+  likes_count     Int             @default(0) /// 点赞数量
+  favorites_count Int             @default(0) /// 收藏数量
+  comments_count  Int             @default(0) /// 评论数量
+  downloads_count Int             @default(0) /// 下载数量
+  views_count     Int             @default(0) /// 浏览数量
+  shares_count    Int             @default(0) /// 转发数量
+  is_featured     Boolean         @default(false) /// 是否是精选作品
+  is_deleted      Boolean         @default(false) /// 是否已删除
+  deleted_at      DateTime?       @db.Timestamptz() /// 删除日期
+  created_at      DateTime        @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at      DateTime        @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  creator                Users                  @relation(fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction) /// 创建者
+  category               ProjectCategories?     @relation(fields: [category_id], references: [id]) /// 所属分类
+  license                Licenses?              @relation(fields: [license_id], references: [id]) /// 许可证
+  project_tags           ProjectTags[] /// 项目标签关联
+  project_files          ProjectFiles[] /// 项目文件
+  project_original_files ProjectOriginalFiles[] /// 项目原始文件
+  project_attachments    ProjectAttachments[] /// 项目附件
+  project_comments       ProjectComments[] /// 项目评论
+  project_favorites      ProjectFavorites[] /// 项目收藏
+  project_shares         ProjectShares[] /// 项目分享
+  project_downloads      ProjectDownloads[] /// 项目下载记录
+
+  @@map("projects")
+}

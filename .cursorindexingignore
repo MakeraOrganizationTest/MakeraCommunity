@@ -1,2 +1,2 @@
-# Templates - accessible but not indexed
-.cursor/templates/
+# env files
+.env*

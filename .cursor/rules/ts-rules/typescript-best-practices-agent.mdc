@@ -1,0 +1,104 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: This rule governs TypeScript development practices across the entire project. It should be considered whenever: (1) Planning new TypeScript features or components, (2) Modifying existing TypeScript code, (3) Reviewing or fixing TypeScript-related bugs, (4) Making architectural decisions that involve TypeScript, (5) Creating new TypeScript files or refactoring existing ones. The rule ensures consistent type safety, modern TypeScript patterns, and maintainable code structure. It's particularly crucial when dealing with data models, API interfaces, state management, and component architecture. Apply this rule when discussing, planning, or implementing any TypeScript-related changes to maintain code quality and prevent common pitfalls.
+globs: 
+alwaysApply: false
+---
+# TypeScript Best Practices
+
+## 使用场景
+
+- 规划新的 TypeScript 功能或组件时
+- 修改现有 TypeScript 代码时
+- 审查或修复 TypeScript 相关 bug 时
+- 做出涉及 TypeScript 的架构决策时
+- 创建新的 TypeScript 文件或重构现有文件时
+
+## 关键规则
+
+### 类型检查和安全性
+
+- 在 `tsconfig.json` 中使用严格类型检查：`"strict": true`
+- 对可能被扩展的对象定义优先使用 interface 而不是 type
+- 始终为函数和方法定义显式返回类型
+- 对简单的标志值使用联合类型而不是枚举
+- 对复杂状态管理使用可区分联合类型
+- 禁止使用 `any` 类型 - 对真正未知的类型使用 `unknown`
+- 始终显式处理 null 和 undefined 情况
+- 对不可变属性和数组使用 readonly 修饰符
+- 使用自定义错误类型实现错误处理
+- 使用类型守卫进行运行时类型检查
+- 保持泛型简单且约束明确
+- 适当使用 Pick、Omit、Partial 等工具类型
+- 使用 JSDoc 注释记录复杂类型和所有公共函数、类和接口
+
+## 示例
+
+### 推荐写法
+
+```typescript
+// 使用带有显式类型的接口
+interface UserState {
+  readonly id: string;
+  name: string;
+  email: string | null;
+  preferences: ReadonlyArray<string>;
+}
+
+// 使用带有类型守卫的可区分联合
+interface RequestPending {
+  status: 'pending';
+}
+
+interface RequestSuccess {
+  status: 'success';
+  data: UserState;
+}
+
+interface RequestError {
+  status: 'error';
+  error: Error;
+}
+
+type RequestState = RequestPending | RequestSuccess | RequestError;
+
+function isSuccess(state: RequestState): state is RequestSuccess {
+  return state.status === 'success';
+}
+
+// 带约束的泛型
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+```
+
+### 不推荐写法
+
+```typescript
+// 错误 - 使用 any 类型
+function processData(data: any) {
+  return data.someProperty;
+}
+
+// 错误 - 未处理 null 情况
+function getUserName(user: { name: string | null }): string {
+  return user.name.toUpperCase(); // 可能崩溃
+}
+
+// 错误 - 未经检查就使用类型断言
+function processResponse(response: unknown) {
+  const data = response as { id: number };
+  return data.id;
+}
+
+// 错误 - 没有类型安全的可变数组
+const items = [];
+items.push(123);
+items.push('string'); // 混合类型数组
+```
+
+> 💡 **提示：** 始终优先考虑类型安全和代码可维护性，避免使用 any 类型和不安全的类型断言。 

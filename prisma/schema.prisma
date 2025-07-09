@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["prismaSchemaFolder"]
+}
+
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output   = "../docs/interface"
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+  output   = "../docs/dbml" // dbdiagram.io/d 查看
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+// 用户状态枚举
+enum UserStatusType {
+  active // 活跃状态
+  pending // 待处理状态
+  restricted // 受限状态
+  banned // 封禁状态
+  inactive // 非活跃状态
+}
+
+// 性别枚举
+enum GenderType {
+  male // 男性
+  female // 女性
+  other // 其他
+  prefer_not_to_say // 不愿透露
+}
+
+// 权限类型枚举
+enum PermissionType {
+  system // 系统级权限
+  page // 页面级权限
+  module // 模块级权限
+  operation // 操作级权限
+  data // 数据级权限
+}
+
+// 模型可见性枚举
+enum VisibilityType {
+  public // 公开可见
+  private // 仅作者可见
+}
+
+// 举报类型枚举
+enum ReportType {
+  copyright // 版权侵权
+  inappropriate // 不当内容
+  spam // 垃圾内容
+  harassment // 骚扰行为
+  violence // 暴力内容
+  adult // 成人内容
+  other // 其他问题
+}
+
+// 内容类型枚举
+enum ContentType {
+  model // 模型
+  comment // 评论
+}
+
+// 原创属性枚举
+enum CreationType {
+  original // 原创
+  derivative // 二创
+}
+
+// 项目状态枚举
+enum ProjectStatus {
+  draft // 草稿 - 创建但未提交
+  submitted // 已提交 - 等待审核
+  rejected // 已拒绝 - 审核未通过
+  published // 已通过 - 审核通过并已发布
+}
+
+// 举报状态枚举
+enum ReportStatus {
+  pending // 待处理
+  processing // 处理中
+  resolved // 已解决
+  ignored // 已忽略
+}
+
+// 实体类型枚举 - 用于商品链接关联
+enum EntityType {
+  cutter // 刀具
+  material // 材质
+  machine // 机器
+  accessory // 配件
+  tool // 工具
+  software // 软件
+  other // 其他
+}
+
+// 文件类型枚举
+enum FileType {
+  project_file /// 项目文件
+  original_file /// 原始文件
+  attachment /// 附件
+}

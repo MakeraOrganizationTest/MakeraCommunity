@@ -1,0 +1,29 @@
+// 标签表
+model Tag {
+  id         Int      @id @default(autoincrement()) @db.Integer /// 标签唯一标识符
+  name       String /// 标签名称
+  created_by String?  @db.Uuid /// 创建者ID，官方标签可能为空
+  created_at DateTime @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at DateTime @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  content_tags ProjectTags[] /// 内容标签关联
+
+  @@unique([name]) /// 确保标签名全局唯一
+  @@index([name]) /// 为name添加索引提高查询效率
+  @@map("tags")
+}
+
+// 项目标签关联表
+model ProjectTags {
+  id         String   @id @default(uuid()) @db.Uuid /// 关联唯一标识符
+  project_id String   @db.Uuid /// 项目ID
+  tag_id     Int      @db.Integer /// 标签ID
+  created_at DateTime @default(now()) @db.Timestamptz() /// 创建时间
+
+  // 关系
+  tag     Tag      @relation(fields: [tag_id], references: [id]) /// 标签
+  project Projects @relation(fields: [project_id], references: [id]) /// 项目
+
+  @@map("project_tags")
+}

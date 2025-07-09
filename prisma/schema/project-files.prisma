@@ -1,0 +1,29 @@
+// 项目文件表
+model ProjectFiles {
+  id                 String  @id @default(uuid()) @db.Uuid /// 配置唯一标识符
+  project_id         String  @db.Uuid /// 关联的项目 ID
+  name               String /// 配置名称
+  description        String? /// 配置描述
+  file_path          String /// 配置文件存储路径
+  file_size          BigInt /// 配置文件大小(字节)
+  file_type          String /// 配置文件类型/扩展名(如mkc, f3d等)
+  thumbnail          String? /// 项目文件缩略图
+  preview_model_path String? /// 预览模型路径(低精度STL)
+  order              Int? /// 排序
+  downloads_count    Int     @default(0) /// 下载数量
+
+  // 刀具信息
+  cutters Json? /// 刀具清单信息(JSON格式，二维数组，每个数组元素包含id和name)
+
+  // 毛坯信息
+  blank Json? /// 毛坯材料(JSON格式，数组，每个数组元素包含id和name)
+
+  parameters Json? /// 其他参数(JSON格式)
+  created_at DateTime @default(now()) @db.Timestamptz() /// 创建时间
+  updated_at DateTime @default(now()) @db.Timestamptz() /// 更新时间
+
+  // 关系
+  project Projects @relation(fields: [project_id], references: [id], onDelete: Cascade) /// 所属项目，级联删除
+
+  @@map("project_files")
+}
